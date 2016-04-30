@@ -1,0 +1,105 @@
+/* facility table */
+CREATE TABLE `carrollevents`.`facility` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(30) NOT NULL,
+  `Addr` VARCHAR(45) NULL,
+  `City` VARCHAR(45) NULL,
+  `State` VARCHAR(2) NULL,
+  `Zip` VARCHAR(10) NULL,
+  `Desc` TEXT NULL,
+  `Prefix` VARCHAR(5) NULL,
+  PRIMARY KEY (`ID`));
+
+/* room table */
+CREATE TABLE `carrollevents`.`room` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(30) NULL,
+  `RoomNum` VARCHAR(45) NOT NULL,
+  `Desc` TEXT NULL,
+  `Capacity` INT NULL,
+  `FacilityID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `id_idx` (`FacilityID` ASC),
+  CONSTRAINT `id`
+    FOREIGN KEY (`FacilityID`)
+    REFERENCES `carrollevents`.`facility` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+/* storage space table */
+CREATE TABLE `carrollevents`.`storagespace` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `RoomID` INT NOT NULL,
+  `Desc` TEXT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `'id'_idx` (`RoomID` ASC),
+  CONSTRAINT `'id'`
+    FOREIGN KEY (`RoomID`)
+    REFERENCES `carrollevents`.`room` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+/* category table */
+CREATE TABLE `carrollevents`.`category` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `Desc` TEXT NULL,
+  PRIMARY KEY (`ID`));
+
+
+/* resource table */
+CREATE TABLE `carrollevents`.`resource` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `Desc` TEXT NULL,
+  `Manu` VARCHAR(45) NULL,
+  `Model` VARCHAR(45) NULL,
+  `PurchaseDT` DATETIME NULL,
+  `CategoryID` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `fkCatID`
+    FOREIGN KEY (`ID`)
+    REFERENCES `carrollevents`.`category` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+/* resource photo */
+CREATE TABLE `carrollevents`.`resourcephoto` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `ResourceID` VARCHAR(45) NOT NULL,
+  `PhotoName` VARCHAR(45) NULL,
+  `PhotoDesc` TEXT NULL,
+  `PhotoLoc` TEXT NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `fkResourceID`
+    FOREIGN KEY (`ID`)
+    REFERENCES `carrollevents`.`resource` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+/* inventory */
+CREATE TABLE `carrollevents`.`inventory` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `StorageID` INT NOT NULL,
+  `ResourceID` INT NOT NULL,
+  `Qty` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fkStorage_idx` (`StorageID` ASC),
+  CONSTRAINT `fkStorage`
+    FOREIGN KEY (`StorageID`)
+    REFERENCES `carrollevents`.`storagespace` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fkResource`
+    FOREIGN KEY (`ID`)
+    REFERENCES `carrollevents`.`resource` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
