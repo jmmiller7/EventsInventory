@@ -24,47 +24,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html >
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="images/culogo.png">
-
-    <title>CU RES | Login</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/signin.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>Log-in</title>
+	<link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+	<link rel="stylesheet" href="css/signin.css">
+	<link rel="icon" href="images/culogo.png">
   </head>
 
   <body>
-	<div class="container">
-		<div align="center" class="header">
-			<img src="images/cuhorizontal.png" alt="Carroll University Logo" />
+
+	<div class="login-card">
+	<img src="images/cuhorizontal.png" alt="Carroll University Logo" />
+	<h1>Please Log In.</h1><br>
+		<form method="post">
+			<input type="text" name="username" placeholder="Username">
+			<input type="password" name="password" placeholder="Password">
+			<input type="submit" name="login" class="login login-submit" value="login">
+		</form>
+		
+		<div class="login-help">
+			<a href="#">Forgot Password</a>
 		</div>
 	</div>
-    <div class="container">
 
-      <form class="form-signin" method="post">
-        <h2 class="form-signin-heading">Please Sign In</h2>
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input name="username" type="text" id="inputUsername" class="form-control" placeholder="Email address" required autofocus>
-        <label for="password" class="sr-only">Password</label>
-        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-      </form>
-
-    </div> <!-- /container -->
+	<!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+	   
   </body>
 </html>
