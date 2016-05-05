@@ -9,7 +9,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$mypassword = addslashes($_POST['password']);
 	
 	$sql = "SELECT id FROM users WHERE username='$myusername' and password='$mypassword'";
-	//$sql = "SELECT id FROM users WHERE username='eventstu' and password='\$omething1'";
 	$result = mysql_query($sql);
 	$count = mysql_num_rows($result);
 	
