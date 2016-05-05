@@ -14,7 +14,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	
 	// make sure only one record was returned
 	if($count==1){
-		$_SESSION['login_admin']=$myusername;
+		//$_SESSION['login_admin']=$myusername;
+		$_SESSION['loggedIn'] = true;
 		header("location: admin/index.php");
 	}
 	else
