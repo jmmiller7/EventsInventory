@@ -8,15 +8,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	//$mypassword = md5(addslashes($_POST['username']));
 	$mypassword = addslashes($_POST['password']);
 	
-	$sql = "SELECT id FROM users WHERE username='$myusername' and password='$mypassword'";
+	$sql = "SELECT id, privilege FROM users WHERE username='$myusername' and password='$mypassword'";
 	$result = mysql_query($sql);
 	$count = mysql_num_rows($result);
 	
 	// make sure only one record was returned
 	if($count==1){
 		//$_SESSION['login_admin']=$myusername;
+		
+		$row = mysql_fetch_assoc($result);
 		$_SESSION['loggedIn'] = true;
-		header("location: admin/index.php");
+		$_SESSION['privilege'] = (isset($row['privilege']) ? $row['privilege'] : null);
+		
+		if($_SESSION['privilege'] == 'admin')	
+			header("location: dashboard/admin/index.php");
+		else if($_SESSION['privilege'] == "supervisor")
+			header("location: dashboard/supervisor/index.php");
+		else if($_SESSION['privilege'] == "default")
+			header("location: dashboard/default/index.php");
 	}
 	else
 		echo "<p style='color:red; text-align:center;'>Invalid username or password.</p>";
@@ -36,16 +45,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <body>
 
 	<div class="login-card">
-	<img src="images/cuhorizontal.png" alt="Carroll University Logo" />
+	<img src="images/reslogo.png" alt="Carroll University Logo" />
 	<h1>Please Log In.</h1><br>
 		<form method="post">
 			<input type="text" name="username" placeholder="Username">
 			<input type="password" name="password" placeholder="Password">
-			<input type="submit" name="login" class="login login-submit" value="login">
+			<input type="submit" name="login" class="login login-submit" value="Login">
 		</form>
 		
 		<div class="login-help">
-			<a href="#">Forgot Password</a>
+			<a href="forgotpass.php">Forgot Password</a>
 		</div>
 	</div>
 
