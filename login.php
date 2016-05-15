@@ -1,31 +1,30 @@
 <?php
 session_start();
 include("../config.php");
-
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	// username and password from form
 	$myusername = addslashes($_POST['username']);
 	//$mypassword = md5(addslashes($_POST['username']));
 	$mypassword = addslashes($_POST['password']);
 	
-	$sql = "SELECT id, privilege FROM users WHERE username='$myusername' and password='$mypassword'";
+	$sql = "SELECT u.id, p.groupname privilege FROM users u inner join groups p on u.privilege = p.ID where u.username = '$myusername' and u.password = '$mypassword'";
 	$result = mysql_query($sql);
 	$count = mysql_num_rows($result);
 	
 	// make sure only one record was returned
 	if($count==1){
-		//$_SESSION['login_admin']=$myusername;
-		
+			
 		$row = mysql_fetch_assoc($result);
 		$_SESSION['loggedIn'] = true;
 		$_SESSION['privilege'] = (isset($row['privilege']) ? $row['privilege'] : null);
-		
-		if($_SESSION['privilege'] == 'admin')	
+				
+		if($_SESSION['privilege'] == 'Admin')	
 			header("location: dashboard/admin/index.php");
-		else if($_SESSION['privilege'] == "supervisor")
-			header("location: dashboard/supervisor/index.php");
-		else if($_SESSION['privilege'] == "default")
-			header("location: dashboard/default/index.php");
+		else if($_SESSION['privilege'] == "Manager")
+			header("location: dashboard/manager/index.php");
+		else if($_SESSION['privilege'] == "User")
+			header("location: dashboard/user/index.php");
+		
 	}
 	else
 		echo "<p style='color:red; text-align:center;'>Invalid username or password.</p>";

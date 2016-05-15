@@ -6,7 +6,7 @@ CREATE TABLE `carrollevents`.`facility` (
   `City` VARCHAR(45) NULL,
   `State` VARCHAR(2) NULL,
   `Zip` VARCHAR(10) NULL,
-  `Desc` TEXT NULL,
+  `Descrip` TEXT NULL,
   `Prefix` VARCHAR(5) NULL,
   PRIMARY KEY (`ID`));
 
@@ -15,7 +15,7 @@ CREATE TABLE `carrollevents`.`room` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(30) NULL,
   `RoomNum` VARCHAR(45) NOT NULL,
-  `Desc` TEXT NULL,
+  `Descrip` TEXT NULL,
   `Capacity` INT NULL,
   `FacilityID` INT NOT NULL,
   PRIMARY KEY (`ID`),
@@ -32,7 +32,7 @@ CREATE TABLE `carrollevents`.`storagespace` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NOT NULL,
   `RoomID` INT NOT NULL,
-  `Desc` TEXT NULL,
+  `Descrip` TEXT NULL,
   PRIMARY KEY (`ID`),
   INDEX `'id'_idx` (`RoomID` ASC),
   CONSTRAINT `'id'`
@@ -46,7 +46,7 @@ CREATE TABLE `carrollevents`.`storagespace` (
 CREATE TABLE `carrollevents`.`category` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NOT NULL,
-  `Desc` TEXT NULL,
+  `Descrip` TEXT NULL,
   PRIMARY KEY (`ID`));
 
 
@@ -54,7 +54,7 @@ CREATE TABLE `carrollevents`.`category` (
 CREATE TABLE `carrollevents`.`resource` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Name` VARCHAR(45) NOT NULL,
-  `Desc` TEXT NULL,
+  `Descrip` TEXT NULL,
   `Manu` VARCHAR(45) NULL,
   `Model` VARCHAR(45) NULL,
   `PurchaseDT` DATETIME NULL,

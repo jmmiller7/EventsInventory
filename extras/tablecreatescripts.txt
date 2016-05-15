@@ -1,0 +1,135 @@
+/* facility table */
+CREATE TABLE `jmmiller_resinventory`.`facility` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(30) NOT NULL,
+  `Addr` VARCHAR(45) NULL,
+  `City` VARCHAR(45) NULL,
+  `State` VARCHAR(2) NULL,
+  `Zip` VARCHAR(10) NULL,
+  `Descrip` TEXT NULL,
+  `Prefix` VARCHAR(5) NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
+
+/* room table */
+CREATE TABLE `jmmiller_resinventory`.`room` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(30) NULL,
+  `RoomNum` VARCHAR(45) NOT NULL,
+  `Descrip` TEXT NULL,
+  `Capacity` INT NULL,
+  `FacilityID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `id_idx` (`FacilityID` ASC),
+  CONSTRAINT `id`
+    FOREIGN KEY (`FacilityID`)
+    REFERENCES `jmmiller_resinventory`.`facility` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+
+/* storage space table */
+CREATE TABLE `jmmiller_resinventory`.`storagespace` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `RoomID` INT NOT NULL,
+  `Descrip` TEXT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `'id'_idx` (`RoomID` ASC),
+  CONSTRAINT `'id'`
+    FOREIGN KEY (`RoomID`)
+    REFERENCES `jmmiller_resinventory`.`room` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+
+/* category table */
+CREATE TABLE `jmmiller_resinventory`.`category` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `Descrip` TEXT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
+
+
+/* resource table */
+CREATE TABLE `jmmiller_resinventory`.`resource` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NOT NULL,
+  `Descrip` TEXT NULL,
+  `Manu` VARCHAR(45) NULL,
+  `Model` VARCHAR(45) NULL,
+  `PurchaseDT` DATETIME NULL,
+  `CategoryID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `fkCatID`
+  FOREIGN KEY (`CategoryID`) REFERENCES `jmmiller_resinventory`.`category`(`ID`) 
+  ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB;
+
+/* resource photo */
+CREATE TABLE `jmmiller_resinventory`.`resourcephoto` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `ResourceID` VARCHAR(45) NOT NULL,
+  `PhotoName` VARCHAR(45) NULL,
+  `PhotoDescrip` TEXT NULL,
+  `PhotoLoc` TEXT NOT NULL,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `fkResourceID`
+    FOREIGN KEY (`ResourceID`)
+    REFERENCES `jmmiller_resinventory`.`resource` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+
+/* inventory */
+CREATE TABLE `jmmiller_resinventory`.`inventory` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `StorageID` INT NOT NULL,
+  `ResourceID` INT NOT NULL,
+  `Qty` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fkStorage_idx` (`StorageID` ASC),
+  CONSTRAINT `fkStorage`
+    FOREIGN KEY (`StorageID`)
+    REFERENCES `jmmiller_resinventory`.`storagespace` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fkResource`
+    FOREIGN KEY (`ResourceID`)
+    REFERENCES `jmmiller_resinventory`.`resource` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+/* groups table */
+CREATE TABLE `jmmiller_resinventory`.`groups` (
+  
+   `ID` INT NOT NULL AUTO_INCREMENT,
+  
+   `groupname` varchar(50) NOT NULL,
+  
+   PRIMARY KEY (`ID`)
+  
+) ENGINE = InnoDB;
+
+
+/* users */
+CREATE TABLE `jmmiller_resinventory`.`users` ( 
+   `ID` INT NOT NULL AUTO_INCREMENT , 
+   `username` VARCHAR(50) NOT NULL , 
+   `password` VARCHAR(50) NOT NULL , 
+   `salt` VARCHAR(100) NOT NULL , 
+   `privilege` INT NOT NULL,
+   PRIMARY KEY (`ID`) ,
+   FOREIGN KEY (`privilege`) 
+   REFERENCES `jmmiller_resinventory`.`groups`(`ID`) 
+   ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+) ENGINE = InnoDB;
+
+
+

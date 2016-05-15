@@ -5,7 +5,7 @@
 		header("location: ../index.php");
 	}
 	else{
-		if($_SESSION['privilege'] != "supervisor" && $_SESSION['privilege'] != "admin"){
+		if($_SESSION['privilege'] != "Manager" && $_SESSION['privilege'] != "Admin"){
 			header("location: ../".$_SESSION['privilege']."/index.php");
 		}
 	}

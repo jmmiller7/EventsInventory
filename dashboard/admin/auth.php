@@ -1,10 +1,10 @@
 <?php
 
 	if(!$_SESSION["loggedIn"]){
-		header("location: ../index.php");
+		header("location: ../login.php");
 	}
 	else{
-		if($_SESSION['privilege'] != "admin"){
+		if($_SESSION['privilege'] != "Admin"){
 			header("location: ../".$_SESSION['privilege']."/index.php");
 		}
 	}

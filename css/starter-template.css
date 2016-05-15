@@ -10,3 +10,9 @@
 	max-width: 50%;
 	vertical-align:bottom;
 }
+.navbar{
+	background-color:#ddd;
+}
+li.active{
+	background-color:#eee;
+}

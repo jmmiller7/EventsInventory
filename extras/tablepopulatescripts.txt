@@ -1,0 +1,119 @@
+/* create facilities */
+insert into facility (`name`, `prefix`)
+VALUES 
+("Shattuck", "SH"),
+("Sneeden", "SN"),
+("Campus Center", "CC"),
+("Center of Graduate Studies", "CGS"),
+("North Bergstrom", "NB"),
+("Schneider", "OA"),
+("New Hall", "NH")
+
+/* create rooms */
+INSERT INTO `jmmiller_resinventory`.`room` (`Name`, `RoomNum`, `FacilityID`) 
+VALUES 
+("Auditorium", "SH122", "1"), 
+("Recital Hall", "SH107", "1"),
+("Lobby", "SH100", "1"),
+("Basement", "SNLL", "2"),
+("Garage", "SNG", "2"),
+("Attic", "SH3RD", "2"),
+("Office", "CC109", "3"),
+("Ballroom", "CC214", "3"),
+("Boardroom", "CC206", "3"),
+("PIT", "CCB33", "3"),
+("Closet LL09", "CGSLL09", "4"),
+("Closet LL11", "CGSLL11", "4"),
+("LL14", "CGSLL14", "4"),
+("Room 109", "CGS109", "4"),
+("Chair Closet", "NBLL", "5"),
+("Football Shed", "OA1", "6"),
+("Maple Storage", "NH?", "7"),
+("Commencement Storage", "NH?", "7"),
+("Oak Room", "NH02", "7")
+
+/* create storage spaces */
+INSERT INTO `jmmiller_resinventory`.`storagespace` (`Name`, `RoomID`) 
+VALUES
+("Stage Left", 1),
+("Stage Right", 1),
+("Stage Back", 1),
+("Green Room", 2),
+("Stage Back", 2),
+("Recital Hall Storage", 2),
+("Sound Booth", 3),
+("Storage Booth", 3),
+("Sneeden Basement South", 4),
+("Sneeden Basement West", 4),
+("Sneeden Garage", 5),
+("Sneeden Attic", 6),
+("Events Office", 7),
+("Ballroom Storage", 8),
+("Giraffe Storage", 8),
+("Under Stage Storage", 8),
+("Stage Left Storage", 8),
+("Stage Right Storage", 8),
+("A/V Storage", 10),
+("PIT Left Storage", 10),
+("PIT Right Storage", 10),
+("CC Garage", 20),
+("LL09 Closet", 11),
+("LL11 Closet", 12),
+("LL14 Closet", 13),
+("109 Closet", 14),
+("Chair Storage", 15),
+("Football Shed", 16),
+("Maple Storage", 17),
+("Commencement Storage", 18),
+("Oak Room Closet", 19)
+
+
+/* category */
+INSERT INTO `jmmiller_resinventory`.`category` (`Name`) 
+VALUES
+("8\" Tables"),
+("55 Gal. Trash"),
+("Chairs"),
+("A\\V"),
+("Other")
+
+/* resource */
+INSERT INTO `jmmiller_resinventory`.`resource` (`Name`, `CategoryID`) 
+VALUES
+("Brown 8\" Table", 1),
+("Ballroom 8\" Table", 1),
+("CGS 8\" Table", 1),
+("55 Gal. Trash", 2),
+("Ballroom Chair", 3),
+("CGS Red Chair", 3),
+("CGS Blue Chair", 3),
+("MDR/Maple Chair", 3),
+("CC Lobby High Chair", 3),
+("CC Lobby Std Chair", 3),
+("Brown Plush Chair", 3),
+("White Plush Chair", 3),
+("Boardroom Chair", 3),
+("Sneeden Folding Chair", 3),
+("Band Chair", 3),
+("Chapel Std Chair", 3),
+("Chapel Folding Chair", 3),
+("Pink Stack Chair", 3),
+("Black Picnic Chair", 3),
+("Tan Picnic Chair", 3),
+("Lav Mic", 4),
+("Handheld Mic", 4),
+("Slide Advance Remote", 4)
+
+
+/* inventory */
+insert into inventory (`ResourceID`, `StorageID`, `Qty`)
+VALUES
+(24,6,3),
+(27,6,2),
+(27,22,10),
+(24,22,8),
+(41,22,100),
+(42,22,200),
+(43,22,10)
+
+
